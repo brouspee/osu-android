@@ -20,7 +20,7 @@ namespace osu.Game.Rulesets.Osu.Objects
         /// The radius of hit objects (ie. the radius of a <see cref="HitCircle"/>).
         /// MODDED: Increased from 64 to 96 for bigger circles.
         /// </summary>
-        public const float OBJECT_RADIUS = 96;
+        public const float OBJECT_RADIUS = 64;
 
         /// <summary>
         /// The width and height any element participating in display of a hitcircle (or similarly sized object) should be.
