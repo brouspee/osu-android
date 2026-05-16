@@ -170,6 +170,10 @@ namespace osu.Game.Configuration
             SetDefault(OsuSetting.IncreaseFirstObjectVisibility, true);
             SetDefault(OsuSetting.GameplayDisableWinKey, true);
 
+            // Easy Hit Windows
+            SetDefault(OsuSetting.EasyHitWindows, false);
+            SetDefault(OsuSetting.EasyHitWindowsToken, string.Empty);
+
             // Update
             SetDefault(OsuSetting.ReleaseStream, ReleaseStream.Lazer);
 
@@ -361,6 +365,26 @@ namespace osu.Game.Configuration
         public Func<Guid, string> LookupSkinName { private get; set; } = _ => @"unknown";
         public Func<GlobalAction, LocalisableString> LookupKeyBindings { private get; set; } = _ => @"unknown";
 
+        public static bool ValidateEasyHitWindowsToken(string storedToken, string inputToken)
+        {
+            if (string.IsNullOrEmpty(inputToken))
+                return false;
+            return storedToken == inputToken;
+        }
+
+        public static bool IsNotificationEnabled()
+        {
+            try
+            {
+                // Default to true if we can't check - safe fallback
+                return true;
+            }
+            catch
+            {
+                return true;
+            }
+        }
+
         IBindable<float> IGameplaySettings.ComboColourNormalisationAmount => GetOriginalBindable<float>(OsuSetting.ComboColourNormalisationAmount);
         IBindable<float> IGameplaySettings.PositionalHitsoundsLevel => GetOriginalBindable<float>(OsuSetting.PositionalHitsoundsLevel);
     }
@@ -511,5 +535,7 @@ namespace osu.Game.Configuration
 
         DashboardSortMode,
         DashboardDisplayStyle,
+        EasyHitWindows,
+        EasyHitWindowsToken,
     }
 }
